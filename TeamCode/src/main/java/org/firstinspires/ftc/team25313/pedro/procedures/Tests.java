@@ -168,7 +168,7 @@ class TestsLine extends TuningOpMode<Boolean> {
         Follower follower = followerFunction.apply(hardwareMap);
         follower.setPose(Pose.zero());
 
-        double distance = 48;
+        double distance = this.distance;
         boolean forward = true;
 
         Path path1 = line(Pose.zero(), new Pose(distance,0, 0)).constant(0);
@@ -180,15 +180,15 @@ class TestsLine extends TuningOpMode<Boolean> {
         follower.update();
         follower.follow(path1);
 
+        int state = 0;
         while (opModeIsActive()) {
             follower.update();
-            if (follower.atParametricEnd()) {
-                if (forward) {
-                    follower.follow(path2);
-                } else {
-                    follower.follow(path1);
-                }
-                forward = !forward;
+            if (state == 0 && follower.atParametricEnd()) {
+                follower.follow(path2); // Lùi lại vị trí xuất phát
+                state = 1;
+            } else if (state == 1 && follower.atParametricEnd()) {
+                follower.hold(Pose.zero()); // Dừng lại tại điểm xuất phát
+                state = 2;
             }
         }
         return true;
@@ -210,7 +210,7 @@ class TestsCurve extends TuningOpMode<Boolean> {
         Follower follower = followerFunction.apply(hardwareMap);
         follower.setPose(Pose.zero());
 
-        double distance = 48;
+        double distance = this.distance;
         boolean forward = true;
 
         Path path1 = curve(Pose.zero(), new Pose(distance + 0,0), new Pose(distance,distance)).tangent();
@@ -222,15 +222,15 @@ class TestsCurve extends TuningOpMode<Boolean> {
         follower.update();
         follower.follow(path1);
 
+        int state = 0;
         while (opModeIsActive()) {
             follower.update();
-            if (follower.atParametricEnd()) {
-                if (forward) {
-                    follower.follow(path2);
-                } else {
-                    follower.follow(path1);
-                }
-                forward = !forward;
+            if (state == 0 && follower.atParametricEnd()) {
+                follower.follow(path2); // Lùi lại vị trí xuất phát
+                state = 1;
+            } else if (state == 1 && follower.atParametricEnd()) {
+                follower.hold(Pose.zero()); // Dừng lại tại điểm xuất phát
+                state = 2;
             }
         }
         return true;
@@ -252,7 +252,7 @@ class TestsInterpolation extends TuningOpMode<Boolean> {
         Follower follower = followerFunction.apply(hardwareMap);
         follower.setPose(Pose.zero());
 
-        double distance = 48;
+        double distance = this.distance;
         boolean forward = true;
 
         Path path1 = curve(Pose.zero(), new Pose(distance + 0,0), new Pose(distance,distance)).heading((curve, t) -> Math.PI);
@@ -264,15 +264,15 @@ class TestsInterpolation extends TuningOpMode<Boolean> {
         follower.update();
         follower.follow(path1);
 
+        int state = 0;
         while (opModeIsActive()) {
             follower.update();
-            if (follower.atParametricEnd()) {
-                if (forward) {
-                    follower.follow(path2);
-                } else {
-                    follower.follow(path1);
-                }
-                forward = !forward;
+            if (state == 0 && follower.atParametricEnd()) {
+                follower.follow(path2); // Lùi lại vị trí xuất phát
+                state = 1;
+            } else if (state == 1 && follower.atParametricEnd()) {
+                follower.hold(Pose.zero()); // Dừng lại tại điểm xuất phát
+                state = 2;
             }
         }
         return true;
