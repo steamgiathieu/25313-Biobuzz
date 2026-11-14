@@ -38,10 +38,10 @@ public class Constants {
 
 
     public static PinpointConfig localizerConfig = new PinpointConfig(c -> {
-        c.name.set(org.firstinspires.ftc.team25313.Constants.PINPOINT_NAME); // Tên thiết bị Pinpoint trong HardwareMap
-        c.podType.set(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD); // goBILDA_4_BAR_POD hoặc goBILDA_SWINGARM_POD
-        c.xPodOffset.set(-0.7410829649196835); // Offset con lăn dọc (Forward) so với tâm quay robot (inch)
-        c.yPodOffset.set(3.1902036892147514); // Offset con lăn ngang (Strafe) so với tâm quay robot (inch)
+        c.name.set("pinpoint");
+        c.podType.set(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD);
+        c.xPodOffset.set(-0.031762200547015576);
+        c.yPodOffset.set(1.4801911481722134);
         c.xPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
         c.yPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
         c.globalDistanceUnit.set(DistanceUnit.INCH);
